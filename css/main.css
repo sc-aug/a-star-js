@@ -1,0 +1,111 @@
+body {
+  width: 720px;
+  padding: 10px 10px 10px 10px;
+  margin-left:auto;
+  margin-right:auto;
+  /* bg */
+  background-color: #e6e6e6;
+  /* font */
+  font-family: Consolas, monaco, monospace;
+  font-style: normal;
+  font-variant: normal;
+}
+hr {
+  border: none;
+  border-top:1px dotted grey;
+  width:100%;
+}
+select, input {
+  margin-top: 5px;
+  text-align-last: center;
+  width: 130px;
+}
+input {
+  border-radius: 3px;
+  border-width: 0px;
+  background-color: white;
+}
+#content-wrap {
+  width: 700px;
+  padding: 10px 10px 10px 10px;
+  background-color: #EAEDED;
+  border: 1px dotted gray;
+  border-radius: 10px;
+  /* for IE */
+  filter: alpha(opacity=80);
+  /* CSS3 standard */
+  opacity:0.8;
+}
+#header-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+}
+#version {
+  align: right;
+}
+#main-wrap {
+  overflow:hidden; /* cancel float in child*/
+  margin-left: auto;
+  margin-right: auto;
+  width: 690px;
+}
+#left-board, #right-board {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 20px;
+}
+#left-board {
+  width: 532px;
+}
+#right-board {
+  width: 138px;
+  font-size: 12px;
+}
+#maze-wrap {
+  margin-left: auto;
+  margin-right: auto;
+  width: 522px;
+}
+#foot-wrap{
+  margin-left: auto;
+  margin-right: auto;
+}
+#maze-wrap table{
+  width: 522px;
+  height: 522px;
+  background: #EAEDED;
+  border-radius: 2px;
+}
+#maze-wrap td {
+  border-spacing: 1px;
+  border-radius: 2px;
+}
+#findPathBtn, #cleanBtn {
+  border-color: white;
+  background-color: #99bbff;
+}
+.div-row {
+  margin-left: auto;
+  margin-right: auto;
+  float: left;
+  display: inline;
+}
+.div-ctrl {
+  margin: 0px;
+}
+.step {
+  background: #E74C3C;
+  width: auto;
+  height: auto;
+}
+.blank {
+  background: #cccccc;
+  width: auto;
+  height: auto;
+}
+.focus {
+  background: #70db70;
+  width: auto;
+  height: auto;
+}

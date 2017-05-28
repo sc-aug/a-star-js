@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon"> 
+  <title>A* Algorithm</title>
+</head>
+<body>
+  <div id="content-wrap">
+
+    <div id="header-wrap">
+      <center>
+        <h2>A* Algorithm</h2>
+      </center>
+      <div id="version">
+        
+      </div>
+    </div>
+
+    <hr/>
+
+      <div id="main-wrap">
+      
+      <div id="left-board" class="div-row">
+        <div id="maze-wrap">
+        <!-- table here -->
+        </div>
+      </div>
+
+      <div id="right-board" class="div-row">
+        <div id="panel-wrap">
+
+          <div class="div-ctrl">
+          World Size
+            <select id="mazeSelector">
+              <option value="40" selected="selected">40 x 40 maze</option>
+            </select>
+          </div>
+          <hr/>
+          <div class="div-ctrl">
+          Maze Template
+            <select id="mazeSelector">
+              <option value="1" selected="selected">Maze 1</option>
+              <option value="2">Maze 2</option>
+              <option value="3">Maze 3</option>
+              <option value="4">Maze 4</option>
+            </select>
+          </div>
+          <hr/>
+          <div class="div-ctrl" >
+            <input type="button" id="addRandBtn" value="Add Random Blocks">
+          </div>
+          <hr/>
+          <div class="div-ctrl">
+            <input type="button" id="findPathBtn" value="Find Path">
+          </div>
+          <hr/>
+          <div class="div-ctrl">
+            <input type="button" id="cleanBtn" value="Clean Maze">
+            <!--<button id="cleanBtn">Clean World</button>-->
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div style=”clear:both;”></div>
+
+    <div id="foot-wrap">
+      <!-- ref -->
+    </div>
+
+  </div>
+  <script type="text/javascript" src="js/util.js"></script>
+  <script type="text/javascript" src="js/controller.js"></script>
+  <script type="text/javascript" src="js/model.js"></script>
+  <script type="text/javascript" src="js/view.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
