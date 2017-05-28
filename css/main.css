@@ -94,12 +94,12 @@ input {
 .div-ctrl {
   margin: 0px;
 }
-.step {
+.block {
   background: #E74C3C;
   width: auto;
   height: auto;
 }
-.blank {
+.unblock {
   background: #cccccc;
   width: auto;
   height: auto;
