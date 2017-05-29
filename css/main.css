@@ -137,6 +137,10 @@ input {
   border-radius: 5px;
 }
 
+.coordinates input{
+  width: 59px;
+}
+
 .focus {
   background: #70db70;
   width: auto;

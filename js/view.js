@@ -4,7 +4,7 @@ var View = {
     //var die = "world" + size + "die";
     var board = document.getElementById("maze-wrap");
     var tbl = document.createElement("table");
-    //tbl.setAttribute("id", "maze");
+    tbl.setAttribute("id", "maze");
     var row = document.createElement("tr");
     // creating all cells
     for (var i = 0; i < size; i++) {
@@ -25,7 +25,7 @@ var View = {
   },
 
   removeTable: function(id) {
-    var tbl = document.getElementById("maze-wrap");
+    var tbl = document.getElementById("maze");
     if(tbl) tbl.parentNode.removeChild(tbl);
   },
 

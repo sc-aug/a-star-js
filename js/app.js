@@ -1,14 +1,41 @@
+function initMazeProcess() {
+  var mazeSizeSelector = document.getElementById("mazeSizeSelector");
+  var mazeTempSelector = document.getElementById("mazeTempSelector");
+  var start = document.getElementById("start");
+  var dest = document.getElementById("dest");
+  Controller.initMaze(mazeSizeSelector.value, mazeTempSelector.value, start, dest);
+}
+
+
 function handleMazeSizeSelector(Obj) {
   ;
 }
 
 function handleMazeTempSelector(Obj) {
-  Controller.initMaze(mazeSizeSelector.value, mazeTempSelector.value);
+  initMazeProcess();
+}
+
+function handleStartCoordinates() {
+  if (Controller.checkCoord(this)) {
+    initMazeProcess();
+  } else {
+    window.alert("wrong input.");
+  }
+}
+
+function handleDestCoordinates() {
+  if (Controller.checkCoord(this)) {
+    initMazeProcess();
+  } else {
+    window.alert("wrong input.");
+  }
 }
 
 function handleAddRandBtn() {
+  initMazeProcess();
   Controller.addRandNode();
   Controller.refreshBlocks();
+  Controller.refreshPin();
 }
 
 function handleFindPathBtn() {
@@ -16,8 +43,7 @@ function handleFindPathBtn() {
 }
 
 function handleCleanBtn() {
-  Controller.clean();
-  Controller.refreshBlocks();
+  initMazeProcess();
 }
 
 function init() {
@@ -28,6 +54,12 @@ function init() {
   // Maze
   var mazeTempSelector = document.getElementById("mazeTempSelector");
   mazeTempSelector.onchange = handleMazeTempSelector;
+
+  // Coordinates
+  var startCoordinates = document.getElementById("start");
+  var destCoordinates = document.getElementById("dest");
+  startCoordinates.onchange = handleStartCoordinates;
+  destCoordinates.onchange = handleDestCoordinates;
 
   // Add Random Blocks Button
   var addRandBtn = document.getElementById("addRandBtn");
@@ -42,7 +74,7 @@ function init() {
   cleanBtn.onclick = handleCleanBtn;
 
   // create world
-  Controller.initMaze(mazeSizeSelector.value, mazeTempSelector.value);
+  initMazeProcess();
 }
 
 window.onload = init;

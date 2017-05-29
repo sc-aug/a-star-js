@@ -1,4 +1,12 @@
+/* extra function */
 var Util = {
+
+  isValid: function(i) {
+    var size = Model.getMazeSize();
+    if (!isNaN(i) && i>=0 && i<size) return true;
+    return false;
+  },
+
   genRandNode: function() {
     var xyList = [[]];
     var size = Model.getMazeSize();
@@ -14,6 +22,7 @@ var Util = {
   }
 };
 
+/* Priority Queue data structure */
 function PriorityQueue() {
   this.data = [];
 }
