@@ -2,8 +2,8 @@ var Model = {
   maze: [[]], // maze 0 or 1
   heu_dist: [[]], // heuristic distance
   SIZE: 40,
-  start: {r: 0, c: 0},
-  dest:{r: 39, c: 39},
+  start: [0,0],
+  dest: [39,39],
 
   initMaze: function(index) {
     Model.maze = [[]];
@@ -19,13 +19,17 @@ var Model = {
   initHeuDist: function() {
     Model.heuDist = [[]];
     var n = Model.SIZE;
-    var destR = Model.dest.r, destC = Model.dest.c;
+    var destR = Model.dest[0], destC = Model.dest[1];
     for (var i = 0; i < n; i ++) {
       Model.heuDist[i] = [];
       for (var j = 0; j < n; j ++) {
         Model.heuDist[i][j] = Math.abs(i-destR) + Math.abs(j-destC);
       }
     }
+  },
+
+  visited: function(i,j) {
+    Model.maze[i][j] = 1;
   },
 
   addRandNode: function(pairs) {

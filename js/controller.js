@@ -5,6 +5,12 @@ var Controller = {
     Model.initMaze(index);
     Model.initHeuDist();
     Controller.refreshBlocks();
+    Controller.refreshPin();
+  },
+
+  oneStep: function(pos) {
+    Model.visited(pos[0], pos[1]);
+    View.dyePath(pos[0], pos[1]);
   },
 
   refreshBlocks: function() {
@@ -20,10 +26,10 @@ var Controller = {
     }
   },
 
-  refreshStartDest: function() {
+  refreshPin: function() {
     var st = Model.getStartPos();
     var ds = Model.getDestPos();
-    View.twoPoint(st, ds);
+    View.pin(st, ds);
   },
 
   clean: function() {
@@ -74,6 +80,46 @@ var Controller = {
     } else {
       view.die(i,j);
     }
+  }
+
+};
+
+var PathController = {
+
+  findPath: function() {
+    var maze = Model.getMaze();
+    var size = Model.getMazeSize();
+    var heu = Model.getHeuDist();
+    var st = Model.getStartPos();
+    var ds = Model.getDestPos();
+    var queue = new PriorityQueue();
+    queue.push([ st, heu[st[0]][st[1]] ]);
+    while (! queue.empty()) {
+      var element = queue.pop();
+      var cell = element[0];
+      if (element[1] == 1) break;
+      PathController.updateQueue(cell, element[1], queue, maze, heu, size);
+    }
+  },
+
+  updateQueue: function(cell, min, queue, maze, heu, size) {
+    var tran = [[0,-1], [0, 1], [-1, 0], [1, 0]];
+    var tmp = [], tr = [];
+    for (var i = 0; i < 4; i ++) {
+      tr = tran[i];
+      tmp = [ tr[0]+cell[0], tr[1]+cell[1] ];
+      // valid index
+      if (tmp[0]>=0 && tmp[0]<size && tmp[1]>=0 && tmp[1]<size 
+        // not block
+        && maze[tmp[0]][tmp[1]] == 0
+        // heu dist < min
+        && heu[tmp[0]][tmp[1]] < min) {
+          queue.push([tmp, heu[tmp[0]][tmp[1]]]);
+          Controller.oneStep(tmp);
+          break;
+      }
+    }
+
   }
 
 }

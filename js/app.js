@@ -11,6 +11,10 @@ function handleAddRandBtn() {
   Controller.refreshBlocks();
 }
 
+function handleFindPathBtn() {
+  PathController.findPath();
+}
+
 function handleCleanBtn() {
   Controller.clean();
   Controller.refreshBlocks();
@@ -31,7 +35,7 @@ function init() {
 
   // Find Path Button
   var findPathBtn = document.getElementById("findPathBtn");
-  addRandBtn.onclick = handleAddRandBtn;
+  findPathBtn.onclick = handleFindPathBtn;
 
   // Clean Maze
   var cleanBtn = document.getElementById("cleanBtn");

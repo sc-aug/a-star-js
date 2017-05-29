@@ -40,8 +40,16 @@ var View = {
   },
   
   // two point start & dest
-  twoPoint: function(start, dest) {
-    ;
+  pin: function(start, dest) {
+    var st = document.getElementById("id_" + start[0] + "_" + start[1]);
+    var ds = document.getElementById("id_" + dest[0] + "_" + dest[1]);
+    st.setAttribute("class", ("pin"));
+    ds.setAttribute("class", ("pin"));
+  },
+
+  dyePath: function(i,j) {
+    var cell = document.getElementById("id_" + i + "_" + j);
+    cell.setAttribute("class", ("path"));
   },
 
   foc: function(i, j) {
