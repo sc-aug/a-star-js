@@ -45,8 +45,8 @@ var Controller = {
   },
 
   addRandNode: function() {
-    var xyPairs = util.genRandNode();
-    model.addRandNode(xyPairs);
+    var xyPairs = Util.genRandNode();
+    Model.addRandNode(xyPairs);
   },
 
   // mouse click function
@@ -93,16 +93,15 @@ var PathController = {
     var st = Model.getStartPos();
     var ds = Model.getDestPos();
     var queue = new PriorityQueue();
-    queue.push([ st, heu[st[0]][st[1]] ]);
+    queue.push(st, heu[st[0]][st[1]]);
     while (! queue.empty()) {
       var element = queue.pop();
-      var cell = element[0];
       if (element[1] == 1) break;
-      PathController.updateQueue(cell, element[1], queue, maze, heu, size);
+      PathController.updateQueue(element[0], queue, maze, heu, size);
     }
   },
 
-  updateQueue: function(cell, min, queue, maze, heu, size) {
+  updateQueue: function(cell, queue, maze, heu, size) {
     var tran = [[0,-1], [0, 1], [-1, 0], [1, 0]];
     var tmp = [], tr = [];
     for (var i = 0; i < 4; i ++) {
@@ -111,12 +110,9 @@ var PathController = {
       // valid index
       if (tmp[0]>=0 && tmp[0]<size && tmp[1]>=0 && tmp[1]<size 
         // not block
-        && maze[tmp[0]][tmp[1]] == 0
-        // heu dist < min
-        && heu[tmp[0]][tmp[1]] < min) {
-          queue.push([tmp, heu[tmp[0]][tmp[1]]]);
+        && maze[tmp[0]][tmp[1]] == 0) {
+          queue.push(tmp, heu[tmp[0]][tmp[1]]);
           Controller.oneStep(tmp);
-          break;
       }
     }
 

@@ -3,7 +3,7 @@ function handleMazeSizeSelector(Obj) {
 }
 
 function handleMazeTempSelector(Obj) {
-  Controller.initMaze(Object.target.value);
+  Controller.initMaze(mazeSizeSelector.value, mazeTempSelector.value);
 }
 
 function handleAddRandBtn() {

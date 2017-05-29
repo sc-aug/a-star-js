@@ -1,11 +1,11 @@
-var util = {
-  genRandNode: function(worldSize) {
+var Util = {
+  genRandNode: function() {
     var xyList = [[]];
-    var worldSize = model.getWorldSize();
+    var size = Model.getMazeSize();
 
-    for (var i = 0; i < worldSize; i ++) {
-      r = Math.floor(Math.random() * worldSize);
-      c = Math.floor(Math.random() * worldSize);
+    for (var i = 0; i < size*8; i ++) {
+      r = Math.floor(Math.random() * size);
+      c = Math.floor(Math.random() * size);
       xyList[i] = [];
       xyList[i][0] = r;
       xyList[i][1] = c;

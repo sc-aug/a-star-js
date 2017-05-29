@@ -33,11 +33,11 @@ var Model = {
   },
 
   addRandNode: function(pairs) {
-    var mat = model.getCurMatrix();
+    var maze = Model.getMaze();
     for (var i = 0; i < pairs.length; i ++) {
       var r = pairs[i][0];
       var c = pairs[i][1];
-      mat[r][c] = true;
+      maze[r][c] = 1;
     }
   },
 
