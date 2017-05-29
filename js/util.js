@@ -15,21 +15,20 @@ var util = {
 };
 
 function PriorityQueue() {
-  this.data = []
+  this.data = [];
 }
 
 PriorityQueue.prototype.push = function(element, priority) {
-  priority = +priority
-  for (var i = this.data.length-1; i >= 0 && this.data[i][1] > priority; i--);
-  this.data.splice(i, 0, [element, priority])
+  for (var i = this.data.length-1; i >= 0 && priority > this.data[i][1]; i--);
+  this.data.splice(i+1, 0, [element, priority]);
 }
 
 PriorityQueue.prototype.pop = function() {
-  return this.data.shift()[0]
+  return this.data.pop();
 }
 
 PriorityQueue.prototype.size = function() {
-  return this.data.length
+  return this.data.length;
 }
 
 PriorityQueue.prototype.empty = function() {
