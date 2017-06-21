@@ -13,11 +13,13 @@ function handleMazeSizeSelector(Obj) {
 
 function handleMazeTempSelector(Obj) {
   initMazeProcess();
+  clean = true;
 }
 
 function handleStartCoordinates() {
   if (Controller.checkCoord(this)) {
     initMazeProcess();
+    clean = true;
   } else {
     window.alert("wrong input.");
   }
@@ -26,6 +28,7 @@ function handleStartCoordinates() {
 function handleDestCoordinates() {
   if (Controller.checkCoord(this)) {
     initMazeProcess();
+    clean = true;
   } else {
     window.alert("wrong input.");
   }
@@ -36,14 +39,81 @@ function handleAddRandBtn() {
   Controller.addRandNode();
   Controller.refreshBlocks();
   Controller.refreshPin();
+  clean = true;
 }
 
 function handleFindPathBtn() {
-  PathController.findPath();
+  cleanMaze();
+  disablePanel();
+  PathController.initData();
+  intv = setInterval(function() { PathController.findPathLoop();}, 50);
+  clean = false;
 }
 
 function handleCleanBtn() {
-  initMazeProcess();
+  cleanMaze()
+}
+
+function cleanMaze() {
+  if (! clean) {
+    initMazeProcess();
+    clean = true;
+  }
+}
+
+function handleOneStepBtn() {
+  cleanMaze();
+  PathController.findPathLoop();
+}
+
+function disablePanel() {
+  var mazeSizeSelector = document.getElementById("mazeSizeSelector");
+  // Maze
+  var mazeTempSelector = document.getElementById("mazeTempSelector");
+  // Coordinates
+  var startCoordinates = document.getElementById("start");
+  var destCoordinates = document.getElementById("dest");
+  // Add Random Blocks Button
+  var addRandBtn = document.getElementById("addRandBtn");
+  // Find Path Button
+  var findPathBtn = document.getElementById("findPathBtn");
+  // Clean Maze
+  var cleanBtn = document.getElementById("cleanBtn");
+
+  mazeSizeSelector.disabled = true;
+  mazeTempSelector.disabled = true;
+  addRandBtn.disabled = true;
+  findPathBtn.disabled = true;
+  cleanBtn.disabled = true;
+  startCoordinates.children[0].disabled = true;
+  startCoordinates.children[1].disabled = true;
+  destCoordinates.children[0].disabled = true;
+  destCoordinates.children[1].disabled = true;
+}
+
+function enablePanel() {
+  var mazeSizeSelector = document.getElementById("mazeSizeSelector");
+  // Maze
+  var mazeTempSelector = document.getElementById("mazeTempSelector");
+  // Coordinates
+  var startCoordinates = document.getElementById("start");
+  var destCoordinates = document.getElementById("dest");
+  // Add Random Blocks Button
+  var addRandBtn = document.getElementById("addRandBtn");
+  // Find Path Button
+  var findPathBtn = document.getElementById("findPathBtn");
+  // Clean Maze
+  var cleanBtn = document.getElementById("cleanBtn");
+
+  mazeSizeSelector.disabled = false;
+  mazeTempSelector.disabled = false;
+  addRandBtn.disabled = false;
+  findPathBtn.disabled = false;
+  cleanBtn.disabled = false;
+  startCoordinates.children[0].disabled = false;
+  startCoordinates.children[1].disabled = false;
+  destCoordinates.children[0].disabled = false;
+  destCoordinates.children[1].disabled = false;
 }
 
 function init() {
@@ -73,9 +143,15 @@ function init() {
   var cleanBtn = document.getElementById("cleanBtn");
   cleanBtn.onclick = handleCleanBtn;
 
+  // var oneStepBtn = document.getElementById("oneStepBtn");
+  // oneStepBtn.onclick = handleOneStepBtn;
+
   // create world
   initMazeProcess();
 }
+
+var intv = null;
+var clean = true;
 
 window.onload = init;
 

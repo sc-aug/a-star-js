@@ -60,18 +60,35 @@ var Controller = {
 
 var PathController = {
 
-  findPath: function() {
-    var maze = Model.getMaze();
-    var size = Model.getMazeSize();
-    var heu = Model.getHeuDist();
-    var st = Model.getStartPos();
-    var ds = Model.getDestPos();
-    var queue = new PriorityQueue();
-    queue.push(st, heu[st[0]][st[1]]);
-    while (! queue.empty()) {
-      var element = queue.pop();
-      if (element[1] == 1) break;
-      PathController.updateQueue(element[0], queue, maze, heu, size);
+  maze: null,
+  size: null,
+  heu: null,
+  st: null,
+  ds: null,
+  queue: null,
+
+  initData: function() {
+    this.maze = Model.getMaze();
+    this.size = Model.getMazeSize();
+    this.heu = Model.getHeuDist();
+    this.st = Model.getStartPos();
+    this.ds = Model.getDestPos();
+    this.queue = new PriorityQueue();
+    this.queue.push(this.st, this.heu[this.st[0]][this.st[1]]);
+  },
+
+  findPathLoop() {
+    if (! this.queue.empty()) {
+      var element = this.queue.pop();
+      if (element[1] == 1) {
+        clearInterval(intv);
+        enablePanel();
+        return;
+      }
+      PathController.updateQueue(element[0], this.queue, this.maze, this.heu, this.size);
+    } else {
+      clearInterval(intv);
+      enablePanel();
     }
   },
 
@@ -86,12 +103,13 @@ var PathController = {
         // not block
         && maze[tmp[0]][tmp[1]] == 0) {
           queue.push(tmp, heu[tmp[0]][tmp[1]]);
-          PathController.oneStep(tmp);
+          PathController.markNode(tmp);
+          console.log("mark " + tmp);
       }
     }
   },
 
-  oneStep: function(pos) {
+  markNode: function(pos) {
     Model.visited(pos[0], pos[1]);
     View.dyePath(pos[0], pos[1]);
   },
