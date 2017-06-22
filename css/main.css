@@ -128,6 +128,14 @@ input {
   background: #cccccc;
 }
 
+.block:hover{
+  background: #FFF;
+}
+
+.unblock:hover {
+  background: #FFF;
+}
+
 .pin {
   background: #E74C3C;
 }
