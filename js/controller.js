@@ -54,6 +54,24 @@ var Controller = {
   addRandNode: function() {
     var xyPairs = Util.genRandNode();
     Model.addRandNode(xyPairs);
+  },
+
+  flipBlockState: function(id) {
+    var maze = Model.getMaze();
+    var cord = id.split("_");
+    var i = cord[1], j = cord[2];
+    var start = Model.getStartPos();
+    var dest = Model.getDestPos();
+    if ((i == start[0] && j == start[1]) || (i == dest[0] && j == dest[1])) {
+      return;
+    } else {
+      maze[i][j] = 1-maze[i][j];
+      if (maze[i][j]) {
+        View.block(i,j);
+      } else {
+        View.unblock(i,j);
+      }
+    }
   }
 
 };

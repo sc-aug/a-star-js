@@ -4,6 +4,7 @@ function initMazeProcess() {
   var start = document.getElementById("start");
   var dest = document.getElementById("dest");
   Controller.initMaze(mazeSizeSelector.value, mazeTempSelector.value, start, dest);
+  initMouseFunc();
 }
 
 
@@ -64,6 +65,33 @@ function cleanMaze() {
 function handleOneStepBtn() {
   cleanMaze();
   PathController.findPathLoop();
+}
+
+function handleCellOnclick(Obj) {
+  Controller.flipBlockState(Obj.target.id);
+}
+
+function initMouseFunc() {
+  // MOUSE
+  var size = Model.getMazeSize();
+  var tableCells = getTableCellsObj();
+  for (var i = 0; i < size; i ++) {
+    for (var j = 0; j < size; j ++) {
+      tableCells[i][j].onclick = handleCellOnclick;
+    }
+  }
+}
+
+function getTableCellsObj() {
+  var tbl = [[]];
+  var size = Model.getMazeSize();
+  for (var i = 0; i < size; i ++) tbl[i] = [];
+  for (var i = 0; i < size; i ++) {
+    for (var j = 0; j < size; j ++) {
+      tbl[i][j] = document.getElementById("id_"+i+"_"+j);
+    }
+  }
+  return tbl;
 }
 
 function disablePanel() {
